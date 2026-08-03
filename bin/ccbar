@@ -830,7 +830,7 @@ cmd_gallery() {
   # Force all segments on and a sample label so previews show everything.
   CCBAR_ORG="Acme"
   CCBAR_SHOW_EFFORT=1; CCBAR_SHOW_CTX=1; CCBAR_SHOW_5H=1; CCBAR_SHOW_7D=1
-  CCBAR_SHOW_COST=1; CCBAR_SHOW_BURN=0
+  CCBAR_SHOW_COST=1; CCBAR_SHOW_BURN=0; CCBAR_SHOW_OVERAGE=1
 
   printf "%b\n\n" "${bold}ccbar gallery${RESET} — preset looks you can apply"
 
@@ -879,7 +879,7 @@ _apply_preset() {
 
     # Drop the preview-only overrides, then load the user's real settings.
     unset CCBAR_ORG CCBAR_SHOW_EFFORT CCBAR_SHOW_CTX CCBAR_SHOW_5H CCBAR_SHOW_7D \
-          CCBAR_SHOW_COST CCBAR_SHOW_BURN
+          CCBAR_SHOW_COST CCBAR_SHOW_BURN CCBAR_SHOW_OVERAGE
     load_config
     CCBAR_THEME="$theme"; CCBAR_BAR_WIDTH="$width"
     CCBAR_BAR_FILLED="$filled"; CCBAR_BAR_EMPTY="$empty"
@@ -899,6 +899,7 @@ CCBAR_SHOW_5H="$CCBAR_SHOW_5H"
 CCBAR_SHOW_7D="$CCBAR_SHOW_7D"
 CCBAR_SHOW_COST="$CCBAR_SHOW_COST"
 CCBAR_SHOW_BURN="$CCBAR_SHOW_BURN"
+CCBAR_SHOW_OVERAGE="$CCBAR_SHOW_OVERAGE"
 CFG
     _say "Applied \"$name\" → $CONFIG_FILE"
     _say "Start a new Claude Code session (or restart it) to see it."
@@ -981,7 +982,7 @@ cmd_config() {
   _say "\033[1mccbar setup\033[0m — press Enter to keep the [default].\n"
 
   local org theme width filled empty style
-  local show_effort show_ctx show_5h show_7d show_cost show_burn
+  local show_effort show_ctx show_5h show_7d show_overage show_cost show_burn
 
   org=$(ask "Org / label to show at the front (blank to hide)" "$CCBAR_ORG")
 
@@ -991,6 +992,7 @@ cmd_config() {
   show_ctx=$(ask_yn "  Context window bar" "$CCBAR_SHOW_CTX")
   show_5h=$(ask_yn "  5-hour usage bar" "$CCBAR_SHOW_5H")
   show_7d=$(ask_yn "  7-day usage bar" "$CCBAR_SHOW_7D")
+  show_overage=$(ask_yn "  Overage bar (pay-as-you-go/extra usage)" "$CCBAR_SHOW_OVERAGE")
   show_cost=$(ask_yn "  Session cost (\$)" "$CCBAR_SHOW_COST")
   show_burn=$(ask_yn "  Burn-rate warning (⚠ when on pace to hit a limit early)" "$CCBAR_SHOW_BURN")
 
@@ -1041,6 +1043,7 @@ CCBAR_SHOW_EFFORT="$show_effort"
 CCBAR_SHOW_CTX="$show_ctx"
 CCBAR_SHOW_5H="$show_5h"
 CCBAR_SHOW_7D="$show_7d"
+CCBAR_SHOW_OVERAGE="$show_overage"
 CCBAR_SHOW_COST="$show_cost"
 CCBAR_SHOW_BURN="$show_burn"
 EOF
