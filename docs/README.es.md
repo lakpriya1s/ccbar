@@ -25,14 +25,15 @@ Consulta tu modelo, nivel de esfuerzo, espacio de trabajo y uso en tiempo real d
 </p>
 
 - **Línea 1** — una insignia opcional de organización/etiqueta, el nombre del modelo, el nivel de esfuerzo actual, el directorio del espacio de trabajo y (opcionalmente) el **costo de sesión** en curso.
-- **Línea 2** — barras de uso coloreadas para tu **ventana de contexto**, el límite de tasa de **5 horas** y el límite de tasa de **7 días**, cada una con una cuenta atrás hasta el momento en que se reinicia.
+- **Línea 2** — barras de uso coloreadas para tu **ventana de contexto**, el límite de tasa de **5 horas** y el límite de tasa de **7 días**, además de una barra opcional de **excedente** para el gasto de pago por uso, cada una con una cuenta atrás hasta el momento en que se reinicia.
 
 Las barras cambian de 🟢 verde → 🟡 amarillo → 🔴 rojo a medida que se llenan, así puedes ver de un vistazo cuánto margen te queda.
 
-Dos extras te ayudan a gestionar tus ventanas de límite de tasa:
+Unos pocos extras te ayudan a gestionar el uso más allá de las barras principales:
 
 - **Ventana de 5 horas inactiva** — antes de que hayas enviado tu primer mensaje, la ventana de 5 horas no ha empezado, así que ccbar muestra `5h idle` para indicar que el reloj no está corriendo. (El límite de 5 horas de Claude es una ventana móvil anclada a tu primer mensaje — enviar un mensaje rápido y desechable mientras estás inactivo inicia la ventana antes de tiempo y acorta cualquier espera posterior).
-- **Advertencia de ritmo de consumo** *(opcional)* — cuando tu ritmo actual proyecta agotar un límite *antes* de que se reinicie, ccbar añade una estimación `⚠ <time>` a esa barra. Desactivada de forma predeterminada; actívala en `ccbar config`.
+- **Advertencia de ritmo de consumo** — cuando tu ritmo actual proyecta agotar un límite *antes* de que se reinicie, ccbar añade una estimación `⚠ <time>` a esa barra. Activada de forma predeterminada; desactívala en `ccbar config`.
+- **Barra de excedente** *(opcional)* — una barra `over` independiente que rastrea el gasto de pago por uso/uso adicional, separada de las cuotas del plan de 5 horas y 7 días (una cuenta Pro/Max puede tener ambas a la vez). Desactivada de forma predeterminada; actívala en `ccbar config`.
 
 Más allá de la línea de estado, ccbar te ofrece dos comandos de terminal: **[`ccbar stats`](#usage-insights)** para un panel de uso ampliado, y **[`ccbar history`](#usage-insights)** para las tendencias de uso de los últimos 7 días.
 
@@ -90,8 +91,9 @@ Escribe un archivo sencillo y editable a mano en `~/.config/ccbar/config`:
 | `CCBAR_SHOW_CTX`    | `1`     | Muestra la barra de la ventana de contexto (`1`/`0`).                             |
 | `CCBAR_SHOW_5H`     | `1`     | Muestra la barra de uso de 5 horas (`1`/`0`).                             |
 | `CCBAR_SHOW_7D`     | `1`     | Muestra la barra de uso de 7 días (`1`/`0`).                              |
+| `CCBAR_SHOW_OVERAGE`| `0`     | Muestra la barra de excedente de pago por uso (`1`/`0`).                     |
 | `CCBAR_SHOW_COST`   | `0`     | Muestra el costo de sesión en curso en la línea 1 (`1`/`0`).                 |
-| `CCBAR_SHOW_BURN`   | `0`     | Advierte (`⚠ <time>`) cuando tu ritmo agotará un límite antes de tiempo (`1`/`0`). |
+| `CCBAR_SHOW_BURN`   | `1`     | Advierte (`⚠ <time>`) cuando tu ritmo agotará un límite antes de tiempo (`1`/`0`). |
 | `CCBAR_HISTORY`     | `1`     | Registra instantáneas de uso para `ccbar history` (`1`/`0`).              |
 
 Cada valor tiene un valor predeterminado sensato, por lo que una configuración ausente o parcial se sigue renderizando correctamente.

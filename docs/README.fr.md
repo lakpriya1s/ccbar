@@ -25,14 +25,15 @@ Visualisez votre modèle, votre niveau d'effort, votre espace de travail et votr
 </p>
 
 - **Ligne 1** — un badge org/label optionnel, le nom du modèle, le niveau d'effort actuel, le répertoire de l'espace de travail et (optionnellement) le **coût de la session** en cours.
-- **Ligne 2** — des barres d'utilisation colorées pour votre **fenêtre de contexte**, votre limite de débit sur **5 heures** et votre limite de débit sur **7 jours**, chacune accompagnée d'un compte à rebours jusqu'à sa réinitialisation.
+- **Ligne 2** — des barres d'utilisation colorées pour votre **fenêtre de contexte**, votre limite de débit sur **5 heures** et votre limite de débit sur **7 jours**, ainsi qu'une barre optionnelle de **dépassement** pour les dépenses à l'usage, chacune accompagnée d'un compte à rebours jusqu'à sa réinitialisation.
 
 Les barres passent du 🟢 vert au 🟡 jaune puis au 🔴 rouge à mesure qu'elles se remplissent, ce qui vous permet de voir d'un coup d'œil la marge qu'il vous reste.
 
-Deux extras vous aident à gérer vos fenêtres de limite de débit :
+Quelques extras vous aident à gérer votre utilisation au-delà des barres principales :
 
 - **Fenêtre de 5 heures inactive** — avant l'envoi de votre premier message, la fenêtre de 5 heures n'a pas encore démarré, ccbar affiche donc `5h idle` pour signaler que le compteur n'est pas lancé. (La limite de 5 heures de Claude est une fenêtre glissante ancrée à votre premier message — envoyer un message jetable rapide pendant que vous êtes inactif démarre la fenêtre plus tôt et raccourcit l'attente éventuelle.)
-- **Avertissement de rythme de consommation** *(optionnel)* — lorsque votre rythme actuel projette d'épuiser une limite *avant* sa réinitialisation, ccbar ajoute une estimation `⚠ <time>` à cette barre. Désactivé par défaut ; activez-le dans `ccbar config`.
+- **Avertissement de rythme de consommation** — lorsque votre rythme actuel projette d'épuiser une limite *avant* sa réinitialisation, ccbar ajoute une estimation `⚠ <time>` à cette barre. Activé par défaut ; désactivez-le dans `ccbar config`.
+- **Barre de dépassement** *(optionnel)* — une barre `over` distincte qui suit les dépenses à l'usage/de dépassement de forfait, indépendamment des quotas des forfaits 5 heures et 7 jours (un compte Pro/Max peut avoir les deux en même temps). Désactivée par défaut ; activez-la dans `ccbar config`.
 
 Au-delà de la status line, ccbar vous propose deux commandes de terminal : **[`ccbar stats`](#usage-insights)** pour un panneau d'utilisation détaillé, et **[`ccbar history`](#usage-insights)** pour les tendances d'utilisation sur 7 jours.
 
@@ -90,8 +91,9 @@ Il écrit un fichier simple et modifiable à la main dans `~/.config/ccbar/confi
 | `CCBAR_SHOW_CTX`    | `1`     | Afficher la barre de la fenêtre de contexte (`1`/`0`).                             |
 | `CCBAR_SHOW_5H`     | `1`     | Afficher la barre d'utilisation sur 5 heures (`1`/`0`).                              |
 | `CCBAR_SHOW_7D`     | `1`     | Afficher la barre d'utilisation sur 7 jours (`1`/`0`).                                |
+| `CCBAR_SHOW_OVERAGE` | `0`     | Afficher la barre de dépassement/dépenses à l'usage (`1`/`0`).                    |
 | `CCBAR_SHOW_COST`   | `0`     | Afficher le coût de la session en cours sur la ligne 1 (`1`/`0`).                 |
-| `CCBAR_SHOW_BURN`   | `0`     | Avertir (`⚠ <time>`) lorsque votre rythme va épuiser une limite en avance (`1`/`0`). |
+| `CCBAR_SHOW_BURN`   | `1`     | Avertir (`⚠ <time>`) lorsque votre rythme va épuiser une limite en avance (`1`/`0`). |
 | `CCBAR_HISTORY`     | `1`     | Enregistrer des instantanés d'utilisation pour `ccbar history` (`1`/`0`).              |
 
 Chaque valeur possède une valeur par défaut raisonnable, si bien qu'une configuration manquante ou partielle s'affiche tout de même correctement.
