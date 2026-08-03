@@ -25,14 +25,15 @@ See your model, effort level, workspace, and live usage at a glance.
 </p>
 
 - **Line 1** — an optional org/label badge, the model name, the current effort level, the workspace directory, and (optionally) the running **session cost**.
-- **Line 2** — colored usage bars for your **context window**, **5-hour** rate limit, and **7-day** rate limit, each with a countdown to when it resets.
+- **Line 2** — colored usage bars for your **context window**, **5-hour** rate limit, and **7-day** rate limit, plus an optional **overage** bar for pay-as-you-go spending, each with a countdown to when it resets.
 
 Bars turn 🟢 green → 🟡 yellow → 🔴 red as they fill, so you can see at a glance how much headroom you have left.
 
-Two extras help you manage your rate-limit windows:
+A few extras help you manage usage beyond the core bars:
 
 - **Idle 5-hour window** — before you've sent your first message the 5-hour window hasn't started, so ccbar shows `5h idle` to signal the clock isn't running. (Claude's 5-hour limit is a rolling window anchored to your first message — sending a quick throwaway prompt while idle starts the window early and shortens any eventual wait.)
-- **Burn-rate warning** *(opt-in)* — when your current pace projects to exhaust a limit *before* it resets, ccbar appends a `⚠ <time>` estimate to that bar. Off by default; enable it in `ccbar config`.
+- **Burn-rate warning** — when your current pace projects to exhaust a limit *before* it resets, ccbar appends a `⚠ <time>` estimate to that bar. On by default; disable it in `ccbar config`.
+- **Overage bar** *(opt-in)* — a separate `over` bar tracking pay-as-you-go/extra-usage spending, independent of the 5-hour and 7-day plan quotas (a Pro/Max account can carry both at once). Off by default; enable it in `ccbar config`.
 
 Beyond the status line, ccbar gives you two terminal commands: **[`ccbar stats`](#usage-insights)** for an expanded usage panel, and **[`ccbar history`](#usage-insights)** for 7-day usage trends.
 
@@ -108,8 +109,9 @@ It writes a plain, hand-editable file at `~/.config/ccbar/config`:
 | `CCBAR_SHOW_CTX`    | `1`     | Show the context-window bar (`1`/`0`).                             |
 | `CCBAR_SHOW_5H`     | `1`     | Show the 5-hour usage bar (`1`/`0`).                               |
 | `CCBAR_SHOW_7D`     | `1`     | Show the 7-day usage bar (`1`/`0`).                                |
+| `CCBAR_SHOW_OVERAGE`| `0`     | Show the pay-as-you-go/extra-usage overage bar (`1`/`0`).          |
 | `CCBAR_SHOW_COST`   | `0`     | Show the running session cost on line 1 (`1`/`0`).                 |
-| `CCBAR_SHOW_BURN`   | `0`     | Warn (`⚠ <time>`) when your pace will exhaust a limit early (`1`/`0`). |
+| `CCBAR_SHOW_BURN`   | `1`     | Warn (`⚠ <time>`) when your pace will exhaust a limit early (`1`/`0`). |
 | `CCBAR_HISTORY`     | `1`     | Record usage snapshots for `ccbar history` (`1`/`0`).              |
 
 Every value has a sensible default, so a missing or partial config still renders fine.
