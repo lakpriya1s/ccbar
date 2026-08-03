@@ -3,6 +3,19 @@
 All notable changes to this project are documented here. This project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [0.5.1] - 2026-08-04
+
+### Changed
+- **Burn-rate warning** now defaults to **on** (was off) — most people want
+  the early-exhaustion heads-up without opting in.
+- **Overage bar** now defaults to **off** (was on) — most accounts have no
+  overage data, so a bar that never renders isn't a good default.
+
+### Fixed
+- README (English + all 8 translations) documents `CCBAR_SHOW_OVERAGE` and
+  the corrected `CCBAR_SHOW_BURN` default; refreshed the status-line preview
+  screenshot to show the burn-rate warning live.
+
 ## [0.5.0] - 2026-08-04
 
 ### Added
