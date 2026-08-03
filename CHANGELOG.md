@@ -3,6 +3,15 @@
 All notable changes to this project are documented here. This project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [0.5.0] - 2026-08-04
+
+### Added
+- **Overage usage bar** — tracks pay-as-you-go/extra-usage spending as its own
+  `over` bar, independent of the 5-hour and 7-day plan quotas (a Pro/Max
+  account can carry both at once). Gated by `CCBAR_SHOW_OVERAGE` (on by
+  default), and shown in both the status line and `ccbar stats`. Also asked
+  in the `ccbar config` wizard and carried through gallery presets.
+
 ## [0.4.0] - 2026-07-25
 
 ### Added
